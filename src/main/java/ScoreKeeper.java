@@ -38,4 +38,15 @@ public class ScoreKeeper {
         String scoreTeamBStr = score.substring(3);
         score = scoreTeamAStr + scoreTeamBStr;
     }
+
+    public void scoreTeamB2() {
+        String scoreTeamB = score.substring( 4);
+        int scoreTeamBInt = Integer.parseInt(scoreTeamB);
+        if(scoreTeamBInt < SCORE_LIMIT - 1) {
+            scoreTeamBInt+= 2;
+        }
+        String scoreTeamBStr = String.format("%03d", scoreTeamBInt);
+        String scoreTeamAStr = score.substring(0,4);
+        score = scoreTeamAStr + scoreTeamBStr;
+    }
 }
