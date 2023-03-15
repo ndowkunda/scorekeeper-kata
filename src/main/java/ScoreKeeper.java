@@ -1,52 +1,63 @@
 public class ScoreKeeper {
-    public static final int SCORE_LIMIT = 999;
+    private static final int SCORE_LIMIT = 1000;
+    private static final int ONE_POINT = 1;
+    private static final int TWO_POINTS = 2;
+
     private String score = "000:000";
+    private String teamA;
+    private String teamB;
 
     public String getScore() {
         return score;
     }
 
     public void scoreTeamA1() {
-        String scoreTeamA = score.substring(0, 3);
-        int scoreTeamAInt = Integer.parseInt(scoreTeamA);
-        if(scoreTeamAInt < SCORE_LIMIT) {
-            scoreTeamAInt++;
-        }
-        String scoreTeamAStr = String.format("%03d",scoreTeamAInt);
-        String scoreTeamBStr = score.substring(3);
-        score = scoreTeamAStr + scoreTeamBStr;
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamAInt = getTeamScore(teamA);
+        scoreTeamAInt = incrementScore(scoreTeamAInt,ONE_POINT);
+        updateScore(scoreTeamAInt,getTeamScore(teamB));
     }
 
     public void scoreTeamB1() {
-        String scoreTeamB = score.substring( 4);
-        int scoreTeamBInt = Integer.parseInt(scoreTeamB);
-        if(scoreTeamBInt < SCORE_LIMIT) {
-            scoreTeamBInt++;
-        }
-        String scoreTeamBStr = String.format("%03d", scoreTeamBInt);
-        String scoreTeamAStr = score.substring(0,4);
-        score = scoreTeamAStr + scoreTeamBStr;
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamBInt = getTeamScore(teamB);
+        scoreTeamBInt = incrementScore(scoreTeamBInt,ONE_POINT);
+        updateScore(getTeamScore(teamA),scoreTeamBInt);
     }
 
     public void scoreTeamA2() {
-        String scoreTeamA = score.substring(0, 3);
-        int scoreTeamAInt = Integer.parseInt(scoreTeamA);
-        if(scoreTeamAInt < SCORE_LIMIT - 1) {
-            scoreTeamAInt+= 2;
-        }
-        String scoreTeamAStr = String.format("%03d",scoreTeamAInt);
-        String scoreTeamBStr = score.substring(3);
-        score = scoreTeamAStr + scoreTeamBStr;
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamAInt = getTeamScore(teamA);
+        scoreTeamAInt = incrementScore(scoreTeamAInt,TWO_POINTS);
+        updateScore(scoreTeamAInt,getTeamScore(teamB));
     }
 
+
     public void scoreTeamB2() {
-        String scoreTeamB = score.substring( 4);
-        int scoreTeamBInt = Integer.parseInt(scoreTeamB);
-        if(scoreTeamBInt < SCORE_LIMIT - 1) {
-            scoreTeamBInt+= 2;
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamBInt = getTeamScore(teamB);
+        scoreTeamBInt = incrementScore(scoreTeamBInt, TWO_POINTS);
+        updateScore(getTeamScore(teamA), scoreTeamBInt);
+    }
+
+    private int getTeamScore(String teamScore) {
+        return Integer.parseInt(teamScore);
+    }
+
+    private static int incrementScore(int score, int point) {
+        if(score < SCORE_LIMIT - point) {
+            score += point;
         }
-        String scoreTeamBStr = String.format("%03d", scoreTeamBInt);
-        String scoreTeamAStr = score.substring(0,4);
-        score = scoreTeamAStr + scoreTeamBStr;
+        return score;
+    }
+
+    private void updateScore(int teamAScore, int teamBScore) {
+        String scoreTeamAStr = String.format("%03d", teamAScore);
+        String scoreTeamBStr = String.format("%03d", teamBScore);
+        score = scoreTeamAStr + ":" + scoreTeamBStr;
     }
 }
