@@ -1,0 +1,30 @@
+# Compiled output
+/build/
+/classes/
+/out/
+
+# Gradle files
+.gradle/
+/.gradle/
+/gradlew
+/gradlew.bat
+/gradle-wrapper.jar
+/gradle-wrapper.properties
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Other generated files
+/*.log
+/caches/
+/.cache/
+/.idea_modules/
+/.project
+/.classpath
+
+# System files
+.DS_Store
+Thumbs.db
