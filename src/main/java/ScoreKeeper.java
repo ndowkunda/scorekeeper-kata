@@ -2,6 +2,7 @@ public class ScoreKeeper {
     private static final int SCORE_LIMIT = 1000;
     private static final int ONE_POINT = 1;
     private static final int TWO_POINTS = 2;
+    private static final int THREE_POINTS = 3;
 
     private String score = "000:000";
     private String teamA;
@@ -44,6 +45,22 @@ public class ScoreKeeper {
         updateScore(getTeamScore(teamA), scoreTeamBInt);
     }
 
+    public void scoreTeamA3() {
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamAInt = getTeamScore(teamA);
+        scoreTeamAInt = incrementScore(scoreTeamAInt,THREE_POINTS);
+        updateScore(scoreTeamAInt,getTeamScore(teamB));
+    }
+
+    public void scoreTeamB3() {
+        teamA = score.substring(0,3);
+        teamB = score.substring(4);
+        int scoreTeamBInt = getTeamScore(teamB);
+        scoreTeamBInt = incrementScore(scoreTeamBInt, THREE_POINTS);
+        updateScore(getTeamScore(teamA), scoreTeamBInt);
+    }
+
     private int getTeamScore(String teamScore) {
         return Integer.parseInt(teamScore);
     }
@@ -60,4 +77,5 @@ public class ScoreKeeper {
         String scoreTeamBStr = String.format("%03d", teamBScore);
         score = scoreTeamAStr + ":" + scoreTeamBStr;
     }
+
 }
