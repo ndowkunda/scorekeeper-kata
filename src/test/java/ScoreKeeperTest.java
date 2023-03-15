@@ -23,5 +23,15 @@ class ScoreKeeperTest {
         String actualScore = scoreKeeper.getScore();
         assertThat(actualScore).isEqualTo(expectedScore);
     }
+    @ParameterizedTest
+    @CsvSource({"1,000:001", "10,000:010", "100,000:100", "1000,000:999"})
+    void shouldIncreaseTeamBScoreByOneAfterTeamBScoresOnePoint(int increment, String expectedScore) {
+        ScoreKeeper scoreKeeper = new ScoreKeeper();
+        for (int i = 0; i < increment; i++) {
+            scoreKeeper.scoreTeamB1();
+        }
+        String actualScore = scoreKeeper.getScore();
+        assertThat(actualScore).isEqualTo(expectedScore);
+    }
 
 }
