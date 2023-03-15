@@ -27,4 +27,15 @@ public class ScoreKeeper {
         String scoreTeamAStr = score.substring(0,4);
         score = scoreTeamAStr + scoreTeamBStr;
     }
+
+    public void scoreTeamA2() {
+        String scoreTeamA = score.substring(0, 3);
+        int scoreTeamAInt = Integer.parseInt(scoreTeamA);
+        if(scoreTeamAInt < SCORE_LIMIT - 1) {
+            scoreTeamAInt+= 2;
+        }
+        String scoreTeamAStr = String.format("%03d",scoreTeamAInt);
+        String scoreTeamBStr = score.substring(3);
+        score = scoreTeamAStr + scoreTeamBStr;
+    }
 }
