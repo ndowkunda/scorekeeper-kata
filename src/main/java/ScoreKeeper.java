@@ -1,4 +1,5 @@
 public class ScoreKeeper {
+    public static final int SCORE_LIMIT = 999;
     private String score = "000:000";
 
     public String getScore() {
@@ -8,8 +9,7 @@ public class ScoreKeeper {
     public void scoreTeamA1() {
         String scoreTeamA = score.substring(0, 3);
         int scoreTeamAInt = Integer.parseInt(scoreTeamA);
-        int scoreLimit = 999;
-        if(scoreTeamAInt < scoreLimit) {
+        if(scoreTeamAInt < SCORE_LIMIT) {
             scoreTeamAInt++;
         }
         String scoreTeamAStr = String.format("%03d",scoreTeamAInt);
@@ -20,8 +20,7 @@ public class ScoreKeeper {
     public void scoreTeamB1() {
         String scoreTeamB = score.substring( 4);
         int scoreTeamBInt = Integer.parseInt(scoreTeamB);
-        int scoreLimit = 999;
-        if(scoreTeamBInt < scoreLimit) {
+        if(scoreTeamBInt < SCORE_LIMIT) {
             scoreTeamBInt++;
         }
         String scoreTeamBStr = String.format("%03d", scoreTeamBInt);
