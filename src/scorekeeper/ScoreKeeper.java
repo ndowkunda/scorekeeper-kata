@@ -1,4 +1,6 @@
-public class ScoreKeeper {
+package scorekeeper;
+
+class ScoreKeeper {
     private static final int SCORE_LIMIT = 1000;
     private static final int ONE_POINT = 1;
     private static final int TWO_POINTS = 2;
