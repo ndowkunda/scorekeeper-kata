@@ -24,14 +24,12 @@ sourceSets {
     main {
         java {
             srcDirs = ['src']
-            include 'scorekeeper/**/*.java'
         }
     }
 
     test {
         java {
             srcDirs = ['test']
-            include 'scorekeeper/**/*.java'
         }
     }
 }
