@@ -26,12 +26,12 @@ public class ScoreKeeperAcceptanceTest {
     @Test
     void shouldReturnBothTeamsScoreAfterEveryButtonPressedOnce() {
 
-        scoreKeeper.scoreTeamA1();
-        scoreKeeper.scoreTeamB1();
-        scoreKeeper.scoreTeamA2();
-        scoreKeeper.scoreTeamB2();
-        scoreKeeper.scoreTeamA3();
-        scoreKeeper.scoreTeamB3();
+        scoreTeam("A1", 1);
+        scoreTeam("A2", 1);
+        scoreTeam("A3", 1);
+        scoreTeam("B1", 1);
+        scoreTeam("B2", 1);
+        scoreTeam("B3", 1);
 
         assertEquals("006:006", scoreKeeper.getScore());
 
@@ -39,19 +39,50 @@ public class ScoreKeeperAcceptanceTest {
 
     @Test
     void shouldReturnDoubleDigitScoresForBothTeamsAfterButtonsPressed() {
-
-        scoreKeeper.scoreTeamA1();
-        scoreKeeper.scoreTeamB1();
-        scoreKeeper.scoreTeamA2();
-        scoreKeeper.scoreTeamB2();
-        scoreKeeper.scoreTeamA2();
-        scoreKeeper.scoreTeamB2();
-        scoreKeeper.scoreTeamA3();
-        scoreKeeper.scoreTeamB3();
-        scoreKeeper.scoreTeamA3();
-        scoreKeeper.scoreTeamB3();
-
+        scoreTeam("A1", 1);
+        scoreTeam("A2", 2);
+        scoreTeam("A3", 2);
+        scoreTeam("B1", 1);
+        scoreTeam("B2", 2);
+        scoreTeam("B3", 2);
 
         assertEquals("011:011", scoreKeeper.getScore());
     }
+
+    @Test
+    void shouldReturnTripleDigitScoresForBothTeamsAfterButtonsPressed() {
+        scoreTeam("A1", 100);
+        scoreTeam("A2", 1);
+        scoreTeam("A3", 1);
+        scoreTeam("B1", 100);
+        scoreTeam("B2", 1);
+        scoreTeam("B3", 1);
+
+        assertEquals("105:105", scoreKeeper.getScore());
+    }
+
+    private void scoreTeam(String button, int round) {
+        for (int i = 0; i < round; i++) {
+            switch (button) {
+                case "A1" -> scoreKeeper.scoreTeamA1();
+                case "A2" -> scoreKeeper.scoreTeamA2();
+                case "A3" -> scoreKeeper.scoreTeamA3();
+                case "B1" -> scoreKeeper.scoreTeamB1();
+                case "B2" -> scoreKeeper.scoreTeamB2();
+                case "B3" -> scoreKeeper.scoreTeamB3();
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
