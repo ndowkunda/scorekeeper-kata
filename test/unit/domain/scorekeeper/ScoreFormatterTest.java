@@ -25,13 +25,13 @@ public class ScoreFormatterTest {
     @Test
     void shouldFormatTwoDigitScores() {
         String formattedScore = scoreFormatter.format(10, 10);
-        assertEquals("020:003", formattedScore);
+        assertEquals("010:010", formattedScore);
     }
 
     @Test
     void shouldFormatThreeDigitScores() {
         String formattedScore = scoreFormatter.format(999, 999);
-        assertEquals("000:000", formattedScore);
+        assertEquals("999:999", formattedScore);
     }
 
     @Test
