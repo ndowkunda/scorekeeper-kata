@@ -1,46 +1,43 @@
 package unit.repository;
 
 import domain.scorekeeper.Points;
-import domain.scorekeeper.ScoreFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repository.ScoreKeeperRepository;
 import repository.ScoreKeeperRepositoryImpl;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ScoreKeeperRepositoryImplTest {
-    private ScoreKeeperRepository repository;
-    private ScoreFormatter scoreFormatter;
+    private ScoreKeeperRepositoryImpl repository;
 
     @BeforeEach
     public void setUp() {
-        scoreFormatter = mock(ScoreFormatter.class);
-        repository = new ScoreKeeperRepositoryImpl(scoreFormatter);
+        repository = new ScoreKeeperRepositoryImpl();
 
     }
 
     @Test
     public void shouldIncrementTeamAScore() {
-        when(scoreFormatter.format(2, 0)).thenReturn("002:000");
+        repository.incrementTeamAScore(Points.ONE_POINT);
 
-        repository.incrementTeamAScore(Points.TWO_POINTS);
-        String actualScore = repository.getScore();
+        Map<String, Integer> scores = repository.getScore();
+        int scoreTeamA = scores.get("teamA");
+        int actualScore = 1;
 
-        assertEquals("002:000", actualScore);
+        assertEquals(scoreTeamA, actualScore);
     }
 
     @Test
     public void shouldIncrementTeamBScore() {
         repository.incrementTeamBScore(Points.TWO_POINTS);
 
-        when(scoreFormatter.format(0, 2)).thenReturn("000:002");
+        Map<String, Integer> scores = repository.getScore();
+        int scoreTeamB = scores.get("teamB");
+        int actualScore = 2;
 
-        String actualScore = repository.getScore();
-
-        assertEquals("000:002", actualScore);
+        assertEquals(scoreTeamB, actualScore);
     }
 
     @Test
@@ -48,11 +45,17 @@ public class ScoreKeeperRepositoryImplTest {
         repository.incrementTeamAScore(Points.THREE_POINTS);
         repository.incrementTeamBScore(Points.THREE_POINTS);
 
-        when(scoreFormatter.format(3, 3)).thenReturn("003:003");
+        Map<String, Integer> scores = repository.getScore();
+        int scoreTeamA = scores.get("teamA");
+        int scoreTeamB = scores.get("teamB");
 
-        String actualScore = repository.getScore();
+        int actualScoreTeamA = 3;
+        int actualScoreTeamB = 3;
 
-        assertEquals("003:003", actualScore);
+        assertEquals(actualScoreTeamA, scoreTeamA);
+        assertEquals(actualScoreTeamB, scoreTeamB);
+
+
     }
 
 }

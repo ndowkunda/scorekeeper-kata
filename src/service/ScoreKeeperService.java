@@ -3,9 +3,9 @@ package service;
 import domain.scorekeeper.Points;
 
 public interface ScoreKeeperService {
-    void incrementTeamAScore(Points points);
+    void scoreTeamA(Points points);
 
-    void incrementTeamBScore(Points points);
+    void scoreTeamB(Points points);
 
     String getScore();
 
