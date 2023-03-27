@@ -1,17 +1,17 @@
 package service;
 
 import domain.scorekeeper.Points;
-import presenter.ScoreFormatterImpl;
+import presenter.ScoreFormatter;
 import repository.ScoreKeeperRepository;
 
 import java.util.Map;
 
 public class ScoreKeeperServiceImpl implements ScoreKeeperService {
-    private final ScoreFormatterImpl formatter;
+    private final ScoreFormatter formatter;
 
     private final ScoreKeeperRepository repository;
 
-    public ScoreKeeperServiceImpl(ScoreFormatterImpl formatter, ScoreKeeperRepository repository) {
+    public ScoreKeeperServiceImpl(ScoreFormatter formatter, ScoreKeeperRepository repository) {
         this.formatter = formatter;
         this.repository = repository;
 
@@ -31,7 +31,6 @@ public class ScoreKeeperServiceImpl implements ScoreKeeperService {
     @Override
     public String getScore() {
         Map<String, Integer> scores = repository.getScore();
-        System.out.println(scores);
         int scoreTeamA = scores.get("teamA");
         int scoreTeamB = scores.get("teamB");
         return formatter.format(scoreTeamA, scoreTeamB);
